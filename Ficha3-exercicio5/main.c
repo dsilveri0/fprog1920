@@ -10,7 +10,7 @@ int main()
     printf("Numero 1: ");
     scanf("%d", &num1);
 
-    printf("Numero 2: ");
+    printf("\nNumero 2: ");
     scanf("%d", &num2);
 
     printf("\nIntroduza uma operacao aritmetica: ");
@@ -22,16 +22,25 @@ int main()
         printf("Resultado: %.0f", res);
         break;
     case '-':
+	res = num1 - num2;
         printf("Subtracao: %.0f", res);
         break;
+    case 'x':
     case '*':
-        printf("Multiplicacao");
+	res = num1 * num2;
+        printf("Multiplicacao: %.0f", res);
         break;
+    case ':':
     case '/':
-        printf("Divisao");
-        break;
+	if(num1 != 0 && num2 != 0) {
+		res = num1 / num2;
+		printf("Divisao: %.1f", res);
+	} else
+		printf("Erro - Divisao por zero");
+	break;
     case '%':
-        printf("Resto da divisao inteira");
+	res = num1 % num2;
+        printf("Resto da divisao inteira: %0.f", res);
         break;
     default:
         printf("Operador desconhecido!");
