@@ -19,27 +19,31 @@ int main()
     switch (op) {
     case '+':
         res = num1 + num2;
+
         printf("Resultado: %.0f", res);
         break;
     case '-':
-	res = num1 - num2;
+        res = num1 - num2;
+
         printf("Subtracao: %.0f", res);
         break;
     case 'x':
     case '*':
-	res = num1 * num2;
+        res = num1 * num2;
+
         printf("Multiplicacao: %.0f", res);
         break;
     case ':':
     case '/':
-	if(num1 != 0 && num2 != 0) {
-		res = num1 / num2;
-		printf("Divisao: %.1f", res);
-	} else
-		printf("Erro - Divisao por zero");
-	break;
+        if(num2 != 0) {
+            res = num1 / num2;
+            printf("Divisao: %.1f", res);
+        } else
+            printf("Erro - Divisao por zero");
+        break;
     case '%':
-	res = num1 % num2;
+        res = num1 % num2;
+
         printf("Resto da divisao inteira: %0.f", res);
         break;
     default:
