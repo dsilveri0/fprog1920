@@ -4,7 +4,7 @@
 #define NUM_MAX_ALUNOS 120
 
 int le_numero(int, int);
-char menu_opcoes(int, int, int, int);
+int menu_opcoes(void);
 void ler_notas_alunos(int[], int);
 void mostrar_notas_alunos(int[], int);
 
@@ -24,21 +24,23 @@ int main() {
     return 0;
 }
 
-char menu_opcoes(int c1, int c2, int c3, int c4) {
+int menu_opcoes(void) {
 
-int area = 0, lado, altura, comprimento, largura, raio, base;
-char op;
+int op;
 
     do {
         do {
-            printf("\n\t\tCalculo de Areas \n\n");
-            printf("Triangulo: %d\t\t\t\tRetangulo: %d\n\n", c1, c2);
-            printf("Quadrado: %d\t\t\t\tCirculo: %d\n\n", c3, c4);
-            printf("OPCOES \n\n");
-            printf(" (T)riangulo\n (R)etangulo\n (Q)uadrado\n (C)irculo\n (F)im\n\n");
+            printf("\n\t\----- Menu de Opcoes -----\n\n");
+            printf(" 1 - Registar notas dos estudantes\n");
+            printf(" 2 - Mostrar notas\n");
+            printf(" 3 - Mostrar media das notas\n");
+            printf(" 4 - Mostrar notas positivas\n");
+            printf(" 5 - Mostrar notas negativas\n");
+            printf(" 6 - Mostrar nota mais alta e nota mais baixa\n");
+            printf(" 0 - Sair\n");
             printf("\tSelecione Opcao -> ");
-            scanf(" %c", &op);
-        } while(op != 't' && op != 'T' && op != 'r' && op != 'R' && op != 'f' && op != 'F' && op != 'q' && op != 'Q' && op != 'c' && op != 'C');
+            scanf(" %d", &op);
+        } while(op != 1 && op != 2 && op != 3 && op != 4 && op != 5 && op != 6 && op != 0);
 
         switch(op) {
             case 't':
