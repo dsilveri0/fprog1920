@@ -4,33 +4,26 @@
 #define NUM_MAX_ALUNOS 120
 
 int le_numero(int, int);
-int menu_opcoes(void);
+void menu_opcoes(int[], int);
 void ler_notas_alunos(int[], int);
 void mostrar_notas_alunos(int[], int);
+int confirmar_saida(int[], int);
 
 int main() {
-    int notas_estudantes[NUM_MAX_ALUNOS];
-    int num_estudantes;
+    int notas_estudantes[NUM_MAX_ALUNOS], num_estudantes = 0;
 
-    printf("Introduza um numero de estudantes para ler notas: ");
-    num_estudantes = le_numero(0, 120);
-
-    printf("\nIntroduza as notas dos alunos.\n");
-    ler_notas_alunos(notas_estudantes, num_estudantes);
-
-    printf("\n\nNotas dos estudantes:\n");
-    mostrar_notas_alunos(notas_estudantes, num_estudantes);
+    menu_opcoes(notas_estudantes, num_estudantes);
 
     return 0;
 }
 
-int menu_opcoes(void) {
+void menu_opcoes(int notas_estudantes[], int num_estudantes) {
 
-int op;
+    int op;
 
     do {
         do {
-            printf("\n\t\----- Menu de Opcoes -----\n\n");
+            printf("\n\t----- Menu de Opcoes -----\n\n");
             printf(" 1 - Registar notas dos estudantes\n");
             printf(" 2 - Mostrar notas\n");
             printf(" 3 - Mostrar media das notas\n");
@@ -38,50 +31,43 @@ int op;
             printf(" 5 - Mostrar notas negativas\n");
             printf(" 6 - Mostrar nota mais alta e nota mais baixa\n");
             printf(" 0 - Sair\n");
-            printf("\tSelecione Opcao -> ");
+            printf("\n\tSelecione Opcao -> ");
             scanf(" %d", &op);
         } while(op != 1 && op != 2 && op != 3 && op != 4 && op != 5 && op != 6 && op != 0);
 
         switch(op) {
-            case 't':
-            case 'T':
-                base = le_numero();
-                altura = le_numero();
-                area = area_triangulo(base, altura);
-                c1 = c1 + 1;
-                printf("A area deu: %d \n", area);
-                break;
-            case 'r':
-            case 'R':
-                largura = le_numero();
-                comprimento = le_numero();
-                area = area_retangulo(largura, comprimento);
-                c2 = c2 + 1;
-                printf("A area deu: %d \n", area);
-                break;
-            case 'q':
-            case 'Q':
-                lado = le_numero();
-                area = area_quadrado(lado);
-                printf("A area deu: %d \n", area);
-                c3 = c3 + 1;
-                break;
-            case 'c':
-            case 'C':
-                area = le_numero();
-                area = area_circulo(raio);
-                printf("A area deu: %d \n", area);
-                c4 = c4 + 1;
-                break;
-            case 'f':
-            case 'F':
+            case 1:
+		printf("Indique o numero de estudantes a inserir notas: ");
+    		num_estudantes = le_numero(0, 120);
+
+    		printf("\nIntroduza abaixo as notas dos alunos.\n");
+    		ler_notas_alunos(notas_estudantes, num_estudantes);
+
+		break;
+            case 2:
+		printf("\n\tNotas dos estudantes que foram inseridas:\n");
+    		mostrar_notas_alunos(notas_estudantes, num_estudantes);
+
+		break;
+            case 3:
+
+		break;
+            case 4:
+
+		break;
+	    case 5:
+
+		break;
+	    case 6:
+
+		break;
+            case 0:
                 printf("A sair... \n");
-                confirmar_saida();
+                confirmar_saida(notas_estudantes,num_estudantes);
                 break;
             default:
-                printf("Introduza uma operacao valida!");
-        }
-    } while(op != 'f' && op != 'F');
+                printf("Introduza uma opcao valida!");
+        } } while(op != 0);
 }
 
 int le_numero(int lim_inf, int lim_sup) {
@@ -98,7 +84,7 @@ void ler_notas_alunos(int notas_estudantes[], int num_estudantes) {
     int i;
 
     for(i = 0; i<num_estudantes; i++) {
-        printf("\n\nIntroduza a nota do %dº estudante: ", i+1);
+        printf("\nIntroduza a nota do %dº estudante: ", i+1);
         notas_estudantes[i] = le_numero(0, 20);
     }
 }
@@ -107,7 +93,22 @@ void mostrar_notas_alunos(int notas_estudantes[], int num_estudantes) {
     int i;
 
     for(i = 0; i<num_estudantes; i++) {
-        printf("A nota do %dº estudante foi: ", i+1);
+        printf("Nota do %dº estudante: ", i+1);
         printf("%d\n", notas_estudantes[i]);
     }
 }
+
+int confirmar_saida(int notas_estudantes[], int num_estudantes) {
+    char resposta;
+
+    printf("Quer mesmo sair? (S/N): ");
+    scanf(" %c", &resposta);
+
+    if (resposta == 'S' || resposta == 's')
+        return 0;
+    else
+	menu_opcoes(notas_estudantes, num_estudantes);
+
+    return 0;
+}
+
