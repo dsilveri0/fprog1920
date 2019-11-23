@@ -1,11 +1,11 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#define NUM_MAX_ALUNOS 120
+#define NUM_MAX_ALUNOS 10
 
 int ler_numero(int, int);
 char menu_opcoes(void);
-void ler_notas_alunos(int[], int);
+int *ler_notas_alunos(int[], int);
 void mostrar_notas_alunos(int[], int);
 int confirmar_saida(void);
 float calcular_media_notas(int[], int);
@@ -15,7 +15,7 @@ void mostrar_notas_positivas(int[], int);
 void mostrar_notas_negativas(int[], int);
 
 int main() {
-    int notas_estudantes[NUM_MAX_ALUNOS], num_estudantes = 0, baixa, alta;
+    int notas_estudantes[NUM_MAX_ALUNOS], num_estudantes = 0, baixa, alta, sum=0, limite = 0;
     float media;
     char op;
 
@@ -25,10 +25,28 @@ int main() {
 	    switch(op) {
             case '1':
 		printf("Indique o numero de estudantes a inserir notas: ");
-    		num_estudantes = ler_numero(0, 120);
 
-    		printf("\nIntroduza abaixo as notas dos alunos.\n");
-    		ler_notas_alunos(notas_estudantes, num_estudantes);
+		sum += num_estudantes;
+		limite = NUM_MAX_ALUNOS - sum;
+
+		printf("\n-----------\n sum: %d  \n limite: %d  \n-------------\n", sum, limite);
+
+		if(limite > 0) {
+		    num_estudantes = ler_numero(0, limite);
+
+		    printf("\nIntroduza abaixo as notas dos alunos.\n");
+
+	    	    int *p;
+		    p = ler_notas_alunos(notas_estudantes, num_estudantes);
+
+		    for (int i = 0; i<num_estudantes; i++) {
+		    	//printf("\n NOTAS: \n %d : %d \n", i+1, p[i]);
+			notas_estudantes[i] = p[i];
+			printf("\n NOVO ARRAY: \n %d : %d \n", i+1, notas_estudantes[i]);
+		    }
+
+		} else
+		    printf("\nOoops! Chegou ao limite! Nao pode introduzir mais estudantes.\n");
 
 		break;
             case '2':
@@ -99,19 +117,21 @@ int ler_numero(int lim_inf, int lim_sup) {
     int num;
 
     do {
-        scanf("%d", &num);
+	scanf("%d", &num);
     } while(num < lim_inf || num > lim_sup);
 
     return num;
 }
 
-void ler_notas_alunos(int notas_estudantes[], int num_estudantes) {
+int * ler_notas_alunos(int notas_estudantes[], int num_estudantes) {
     int i;
 
     for(i = 0; i<num_estudantes; i++) {
         printf("\nIntroduza a nota do %dº estudante: ", i+1);
         notas_estudantes[i] = ler_numero(0, 20);
     }
+
+    return notas_estudantes;
 }
 
 void mostrar_notas_alunos(int notas_estudantes[], int num_estudantes) {
