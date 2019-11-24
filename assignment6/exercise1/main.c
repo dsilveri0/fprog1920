@@ -5,7 +5,7 @@
 
 int ler_numero(int, int);
 char menu_opcoes(void);
-int *ler_notas_alunos(int[], int);
+int * ler_notas_alunos(int[], int);
 void mostrar_notas_alunos(int[], int);
 int confirmar_saida(void);
 float calcular_media_notas(int[], int);
@@ -43,9 +43,10 @@ int main() {
 		            jupiter[i] = p[i];
 		        }
 		    } else {
+			cont = 0;
 		    	for(int i = sum; i<sum+num_estudantes; i++) {
-			    cont += 1;
-			    jupiter[i] = p[cont-1];
+			    jupiter[i] = p[cont];
+			    cont++;
 		        }
 		    }
 
