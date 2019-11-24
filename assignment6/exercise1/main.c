@@ -15,9 +15,10 @@ void mostrar_notas_positivas(int[], int);
 void mostrar_notas_negativas(int[], int);
 
 int main() {
-    int notas_estudantes[NUM_MAX_ALUNOS], num_estudantes = 0, baixa, alta, sum=0, limite = 0;
+    int notas_estudantes[NUM_MAX_ALUNOS], num_estudantes = 0, baixa, alta, sum=0, limite = 0, cont = 0;
     float media;
     char op;
+    int jupiter[NUM_MAX_ALUNOS];
 
     do {
 	    op = menu_opcoes();
@@ -29,8 +30,6 @@ int main() {
 		sum += num_estudantes;
 		limite = NUM_MAX_ALUNOS - sum;
 
-		printf("\n-----------\n sum: %d  \n limite: %d  \n-------------\n", sum, limite);
-
 		if(limite > 0) {
 		    num_estudantes = ler_numero(0, limite);
 
@@ -39,10 +38,15 @@ int main() {
 	    	    int *p;
 		    p = ler_notas_alunos(notas_estudantes, num_estudantes);
 
-		    for (int i = 0; i<num_estudantes; i++) {
-		    	//printf("\n NOTAS: \n %d : %d \n", i+1, p[i]);
-			notas_estudantes[i] = p[i];
-			printf("\n NOVO ARRAY: \n %d : %d \n", i+1, notas_estudantes[i]);
+		    if(sum == 0){
+			for(int i = 0; i<num_estudantes; i++) {
+		            jupiter[i] = p[i];
+		        }
+		    } else {
+		    	for(int i = sum; i<sum+num_estudantes; i++) {
+			    cont += 1;
+			    jupiter[i] = p[cont-1];
+		        }
 		    }
 
 		} else
@@ -51,7 +55,10 @@ int main() {
 		break;
             case '2':
 		printf("\n\tNotas dos estudantes que foram inseridas:\n");
-    		mostrar_notas_alunos(notas_estudantes, num_estudantes);
+    		if(sum == 0)
+			mostrar_notas_alunos(jupiter, num_estudantes);
+		else
+			mostrar_notas_alunos(jupiter, sum);
 
 		break;
             case '3':
@@ -136,14 +143,10 @@ int * ler_notas_alunos(int notas_estudantes[], int num_estudantes) {
 
 void mostrar_notas_alunos(int notas_estudantes[], int num_estudantes) {
     int i;
-    if(num_estudantes != 0) {
-    	for(i = 0; i<num_estudantes; i++) {
-            printf("Nota do %dº estudante: ", i+1);
-            printf("%d\n", notas_estudantes[i]);
-    	}
-    } else
-	printf("Nao foram introduzidas notas de estudantes!");
-
+    for(i = 0; i<10; i++) {
+        printf("Nota do %dº estudante: ", i+1);
+        printf("%d\n", notas_estudantes[i]);
+    }
 }
 
 float calcular_media_notas(int notas_estudantes[], int num_estudantes) {
