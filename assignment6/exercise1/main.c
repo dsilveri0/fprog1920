@@ -18,7 +18,7 @@ int main() {
     int notas_estudantes[NUM_MAX_ALUNOS], num_estudantes = 0, baixa, alta, sum=0, limite = 0, cont = 0;
     float media;
     char op;
-    int jupiter[NUM_MAX_ALUNOS];
+    int notas[NUM_MAX_ALUNOS];
 
     do {
 	    op = menu_opcoes();
@@ -40,12 +40,12 @@ int main() {
 
 		    if(sum == 0){
 			for(int i = 0; i<num_estudantes; i++) {
-		            jupiter[i] = p[i];
+		            notas[i] = p[i];
 		        }
 		    } else {
 			cont = 0;
 		    	for(int i = sum; i<sum+num_estudantes; i++) {
-			    jupiter[i] = p[cont];
+			    notas[i] = p[cont];
 			    cont++;
 		        }
 		    }
@@ -57,9 +57,9 @@ int main() {
             case '2':
 		printf("\n\tNotas dos estudantes que foram inseridas:\n");
     		if(sum == 0)
-			mostrar_notas_alunos(jupiter, num_estudantes);
+			mostrar_notas_alunos(notas, num_estudantes);
 		else
-			mostrar_notas_alunos(jupiter, sum);
+			mostrar_notas_alunos(notas, sum);
 
 		break;
             case '3':
