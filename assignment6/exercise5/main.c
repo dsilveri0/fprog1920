@@ -17,7 +17,6 @@ int main() {
     int vogais = 0;
 
     printf("\nIntroduza uma palavra: \n");
-    //scanf("%s", vetor_original);
     fgets(vetor_original, MAX_CARACTERES, stdin);
 
     vogais = conta_vogais(vetor_original);
@@ -60,10 +59,15 @@ void retirar_espacos(char vetor_original[MAX_CARACTERES], char vetor_sem_espacos
     int len = 0;
 
     len = strlen(vetor_original);
+    printf("\n");
 
     for(int i = 0; i < len; i++) {
         if(isspace(vetor_original[i])) {
-	    printf("\nExiste um espaco na posicao %d\n", i);
+	    for(int j=i; j<len; j++) {
+	        vetor_original[j] = vetor_original[j+1];
+	    }
+	len--;
 	}
     }
+    printf("\n%s\n", vetor_original);
 }
