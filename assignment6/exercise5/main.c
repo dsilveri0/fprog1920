@@ -10,14 +10,22 @@ void inverte_string(char [], char[]);
 void retirar_espacos (char [], char[]);
 
 int main() {
-    char vetor_original[MAX_CARACTERES];
-    //char vetor_invertido[MAX_CARACTERES] = {"\0"};
-    //char vetor_sem_espacos[MAX_CARACTERES] = {"\0"};
+    char vetor_original[MAX_CARACTERES] = {"\0"};
+    char vetor_invertido[MAX_CARACTERES] = {"\0"};
+    char vetor_sem_espacos[MAX_CARACTERES] = {"\0"};
+
+    int vogais = 0;
 
     printf("\nIntroduza uma palavra: \n");
     scanf("%s", vetor_original);
 
-    conta_vogais(vetor_original);
+
+    vogais = conta_vogais(vetor_original);
+
+
+
+
+    printf("\nNº de vogais: %d\n", vogais);
 
     return 0;
 }
@@ -25,17 +33,23 @@ int main() {
 int conta_vogais(char vetor_original[MAX_CARACTERES]) {
     int len = 0, cont = 0;
 
-    if(isalpha(vetor_original)) {
-        len = strlen(vetor_original);
-        printf("%d", len);
+    len = strlen(vetor_original);
 
-        for(int i = 0; i < len; i++) {
-	    if(vetor_original[i] == 'a') {
-	        printf("\nFound the letter A at position %d\n", i);
-		cont++;
-	    }
-        }
+    for(int i = 0; i < len; i++) {
+        if(tolower(vetor_original[i]) == 'a' || tolower(vetor_original[i]) == 'e' || tolower(vetor_original[i]) == 'i' || tolower(vetor_original[i]) == 'o' || tolower(vetor_original[i]) == 'u') {
+	    cont++;
+	}
     }
 
     return cont;
+}
+
+void inverte_string(char vetor_original[MAX_CARACTERES], char vetor_invertido[MAX_CARACTERES]) {
+   int len = 0;
+
+   len = strlen(vetor_original);
+
+   for(int i = len, j = 0; i > 0, j < len; i--, j++) {
+       vetor_invertido[j] = vetor_original[i];
+   }
 }
