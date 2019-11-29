@@ -2,8 +2,8 @@
 #include <stdlib.h>
 #include <time.h>
 
-#define LINHAS 3
-#define COLUNAS 3
+#define LINHAS 10
+#define COLUNAS 10
 #define MAX_ALEATORIO 100;
 
 void iniciar_matriz(int [][COLUNAS]);
@@ -50,6 +50,6 @@ void mostrar_matriz(int matriz[][COLUNAS]) {
     	for(int j = 0; j < COLUNAS; j++) {
 	    printf("\t%d\t", matriz[i][j]);
 	}
-	printf("\n");
+	printf("\n\n");
     }
 }
