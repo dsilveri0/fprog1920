@@ -13,9 +13,10 @@ int ler_numero(int, int);
 
 
 int main() {
-    int matriz[LINHAS][COLUNAS];
+    int matriz[LINHAS][COLUNAS], valor;
 
-    ler_numero(0, 100);
+    valor = ler_numero(0, 100);
+    pesquisar_numero(matriz, valor);
     iniciar_matriz(matriz);
     mostrar_matriz(matriz);
 
@@ -51,5 +52,17 @@ void mostrar_matriz(int matriz[][COLUNAS]) {
 	    printf("\t%d\t", matriz[i][j]);
 	}
 	printf("\n");
+    }
+}
+
+void pesquisar_numero(int matriz[][COLUNAS], int numero) {
+    for(int i = 0; i < LINHAS; i++) {
+    	for(int j = 0; j < COLUNAS; j++) {
+	    if(matriz[i][j] == numero) {
+	        printf("\nValor encontrado na linha %d - coluna %d\n", i, j);
+	    } else {
+		printf("\nValor não encontrado\n");
+	    }
+	}
     }
 }
