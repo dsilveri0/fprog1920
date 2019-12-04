@@ -59,7 +59,7 @@ int main() {
     		if(sum == 0)
 			mostrar_notas_alunos(notas, num_estudantes);
 		else
-			mostrar_notas_alunos(notas, sum);
+			mostrar_notas_alunos(notas, sum+num_estudantes);
 
 		break;
             case '3':
@@ -144,7 +144,7 @@ int * ler_notas_alunos(int notas_estudantes[], int num_estudantes) {
 
 void mostrar_notas_alunos(int notas_estudantes[], int num_estudantes) {
     int i;
-    for(i = 0; i<10; i++) {
+    for(i = 0; i<num_estudantes; i++) {
         printf("Nota do %dº estudante: ", i+1);
         printf("%d\n", notas_estudantes[i]);
     }
