@@ -143,7 +143,8 @@ int * ler_dados_estudante(t_aluno estudantes[], int num_estudantes) {
     int i;
 
     printf("\nIntroduza a nota do estudante: ");
-    ler_numero(0, 20);
+    // ler numero, nome, e nota-final
+    estudantes[0].nota_final = ler_numero(0, 20);
 
 
     return estudantes;
