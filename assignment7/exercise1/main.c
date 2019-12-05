@@ -140,21 +140,20 @@ int ler_numero(int lim_inf, int lim_sup) {
 }
 
 int * ler_dados_estudante(t_aluno estudantes[], int num_estudantes) {
-    int i;
 
     printf("\nIntroduza a nota do estudante: ");
     // ler numero, nome, e nota-final
     estudantes[0].nota_final = ler_numero(0, 20);
 
 
-    return estudantes;
+    return estudantes[0].nota_final;
 }
 
 void mostrar_dados_estudantes(t_aluno estudantes[], int num_estudantes) {
     int i;
     for(i = 0; i<num_estudantes; i++) {
         printf("Nota do %dº estudante: ", i+1);
-        printf("%d\n", estudantes[i]);
+        printf("%d\n", estudantes[i].numero);
     }
 }
 /*
