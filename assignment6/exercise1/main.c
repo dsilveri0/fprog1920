@@ -178,7 +178,7 @@ int calcular_nota_mais_alta(int notas_estudantes[], int num_estudantes) {
 }
 
 int calcular_nota_mais_baixa(int notas_estudantes[], int num_estudantes) {
-    int i, nota_mais_baixa = 21;
+    int i, nota_mais_baixa = 20;
 
     for(i = 0; i<num_estudantes; i++) {
 
