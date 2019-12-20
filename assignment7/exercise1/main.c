@@ -204,7 +204,7 @@ void eliminar_nota_estudante(t_aluno alunos[], int num_estudantes) {
         for(i = 0; i<num_estudantes; i++) {
             if((alunos[i].numero == numero) && (i != num_estudantes - 1)){
                 for(int j = i; j<num_estudantes; j++){
-                    alunos[j] = alunos[i-1]; // Verificar estas variáveis
+                    alunos[j] = alunos[j+1];
                 }
             }
         }
