@@ -14,6 +14,7 @@ char menu_opcoes(void);
 void ler_dados_estudante(t_aluno[], int);
 void mostrar_dados_estudantes(t_aluno[], int);
 void alterar_nota_estudante(t_aluno[], int);
+void eliminar_nota_estudante(t_aluno[], int);
 float percentagem_notas_positivas(t_aluno[], int);
 float media_notas(t_aluno[], int);
 int nota_mais_baixa(t_aluno[], int);
@@ -78,6 +79,13 @@ int main() {
                 num_estudantes = ler_dados_ficheiro(estudantes);
 
                 break;
+            case '7':
+                printf("\n\tQual o estudante que quer eliminar: \n");
+
+                eliminar_nota_estudante(estudantes, num_estudantes);
+                num_estudantes--;
+
+                break;
             case '0':
                 confirmar_saida();
 
@@ -104,10 +112,11 @@ char menu_opcoes(void) {
             printf(" 4 - Estatisticas\n");
             printf(" 5 - Gravar dados no ficheiro binario\n");
             printf(" 6 - Ler dados do ficheiro binario\n");
+            printf(" 7 - Eliminar dados dos estudantes\n");
             printf(" 0 - Sair\n");
             printf("\n\tSelecione uma opcao -> ");
             scanf(" %c", &op);
-        } while(op != '1' && op != '2' && op != '3' && op != '4' && op != '5' && op != '6' && op != '0');
+        } while(op != '1' && op != '2' && op != '3' && op != '4' && op != '5' && op != '6' && op != '7' && op != '0');
 
 	return op;
 
@@ -117,7 +126,7 @@ int ler_numero(int lim_inf, int lim_sup) {
     int num;
 
     do {
-	scanf("%d", &num);
+        scanf("%d", &num);
     } while(num < lim_inf || num > lim_sup);
 
     return num;
@@ -152,7 +161,6 @@ int procurar_estudante(t_aluno alunos[], int num_estudantes, int num_aluno) {
             flag = 1;
         }
     }
-
     return flag;
 }
 
@@ -169,7 +177,7 @@ void mostrar_dados_estudantes(t_aluno alunos[], int num_estudantes) {
 void alterar_nota_estudante(t_aluno alunos[], int num_estudantes) {
     int i, nova_nota = 0, numero, flag = 0;
 
-    numero = ler_numero(2190000, 21999990);
+    numero = ler_numero(2190000, 2199999);
     flag = procurar_estudante(alunos, num_estudantes, numero);
 
     if(flag == 1) {
@@ -184,6 +192,25 @@ void alterar_nota_estudante(t_aluno alunos[], int num_estudantes) {
         }
     } else if(flag == 0)
         printf("\nAluno nao registado!\n");
+}
+
+void eliminar_nota_estudante(t_aluno alunos[], int num_estudantes) {
+    int i, numero, flag = 0;
+
+    numero = ler_numero(2190000, 2199999);
+    flag = procurar_estudante(alunos, num_estudantes, numero);
+
+    if(flag == 1) {
+        for(i = 0; i<num_estudantes; i++) {
+            if((alunos[i].numero == numero) && (i != num_estudantes - 1)){
+                for(int j = i; j<num_estudantes; j++){
+                    alunos[j] = alunos[i-1]; // Verificar estas variáveis
+                }
+            }
+        }
+    } else if(flag == 0) {
+        printf("\nAluno nao registado!\n");
+    }
 }
 
 float percentagem_notas_positivas(t_aluno alunos[], int num_estudantes) {
@@ -263,9 +290,10 @@ void gravar_dados_ficheiro(t_aluno alunos[], int num_estudantes) {
 
     if (ficheiro == NULL) {
         printf("Impossivel criar ficheiro.");
-    } else
+    } else {
         fwrite(&num_estudantes, sizeof(int), 1, ficheiro);
         fwrite(alunos, sizeof(t_aluno), num_estudantes, ficheiro);
+    }
 
     fclose(ficheiro);
 }
@@ -278,16 +306,16 @@ int ler_dados_ficheiro(t_aluno alunos[]) {
 
     if (ficheiro == NULL) {
         printf("Impossivel abrir ficheiro.");
-    } else
-
-        //fseek(ficheiro, 0L, SEEK_END);
-        //printf("\n%d\n", ftell(ficheiro));
-        // Fazer divisão entre ftell e o sizeof do vetor alunos
-
+    } else {
         fread(&numero_elementos , sizeof(int), 1, ficheiro);
         fread(alunos, sizeof(t_aluno), numero_elementos, ficheiro);
+    }
+        //fseek(ficheiro, 0L, SEEK_END);
+        //printf("\n%d\n", ftell(ficheiro));
 
-        // fread, 1º parametro recebe & quando é uma variavel normal.
+        //Fazer divisão entre ftell e o sizeof do vetor alunos
+
+        //fread, 1º parametro recebe & quando é uma variavel normal.
         //(não leva & quando é um vetor na posição 1 nem qunado é o terceiro parametro não leva &.
 
     fclose(ficheiro);
